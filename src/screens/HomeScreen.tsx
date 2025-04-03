@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   Image,
-  TouchableOpacity,
-  ScrollView,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 // Helper function to resolve image paths
@@ -47,8 +47,9 @@ const HomeScreen = () => {
       <ScrollView>
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerText}>
-            Hello Pretty, {"\n"}find, track and eating healthy food
+          <Text style={styles.headerText}>Hello Pretty,</Text>
+          <Text style={styles.subHeaderText}>
+            Find, track and eat heathy food.
           </Text>
         </View>
 
@@ -58,27 +59,45 @@ const HomeScreen = () => {
           style={styles.bannerImage}
         />
 
+        <View style={styles.progressSection}>
+          <Text
+            style={{
+              color: "#FFF",
+              fontSize: 20,
+              fontWeight: "bold",
+              width: "70%",
+            }}
+          >
+            Track Your Weekly Progress
+          </Text>
+          <TouchableOpacity>
+            <Text style={styles.viewMoreButton}>View more</Text>
+          </TouchableOpacity>
+        </View>
+
         {/* Categories Section */}
         <View style={styles.categorySection}>
           <Text style={styles.sectionTitle}>Choose Your Favorites</Text>
-          <View style={styles.categoryContainer}>
-            {categories.map((category, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.categoryCard,
-                  { backgroundColor: category.color },
-                ]}
-              >
-                <Image
-                  source={getImageSource(category.image)}
-                  resizeMode="contain"
-                  style={styles.categoryImage}
-                />
-                <Text style={styles.categoryText}>{category.name}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.categoryContainer}>
+              {categories.map((category, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.categoryCard,
+                    { backgroundColor: category.color },
+                  ]}
+                >
+                  <Image
+                    source={getImageSource(category.image)}
+                    resizeMode="contain"
+                    style={styles.categoryImage}
+                  />
+                  <Text style={styles.categoryText}>{category.name}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -89,22 +108,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F5F5F5",
+    marginHorizontal: 30,
   },
   header: {
     padding: 20,
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
-    color: "#333",
+    color: "#4CAF50",
+    textAlign: "center",
+  },
+  subHeaderText: {
+    fontSize: 16,
+    color: "#888",
+    marginTop: 5,
+    textAlign: "center",
   },
   bannerImage: {
     width: "100%",
     height: 200,
   },
   progressSection: {
-    marginTop: 20,
+    marginVertical: 20,
     paddingHorizontal: 20,
+    backgroundColor: "#A3A0CA",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 10,
   },
   sectionTitle: {
     fontSize: 18,
@@ -136,8 +169,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   viewMoreButton: {
-    backgroundColor: "#E6E6FA",
+    backgroundColor: "#f3f3fe",
+    color: "#A3A0CA",
     paddingVertical: 10,
+    paddingHorizontal: 6,
     borderRadius: 10,
     alignItems: "center",
   },
@@ -147,19 +182,19 @@ const styles = StyleSheet.create({
   },
   categorySection: {
     marginTop: 20,
-    paddingHorizontal: 20,
   },
   categoryContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
   },
   categoryCard: {
-    width: "45%",
+    width: 150,
+    height: 150,
+    marginRight: 15,
     padding: 15,
     borderRadius: 10,
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15,
   },
   categoryImage: {
     width: 50,
@@ -170,6 +205,7 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 16,
     color: "#333",
+    fontWeight: "bold",
   },
 });
 

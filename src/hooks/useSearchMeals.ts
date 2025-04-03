@@ -1,30 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useState } from "react";
 
-export interface Meal {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-  strInstructions: string;
-  [key: string]: any;
-}
+const useSearchMeals = () => {
+  const [meals, setMeals] = useState<any[] | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-export interface Ingredient {
-  ingredient: string;
-  measure: string;
-}
+  const fetchMeals = async (query: string) => {
+    if (!query) return null;
 
-
-export const useSearchMeals = (query: string) =>
-  useQuery({
-    queryKey: ["meals", query],
-    queryFn: async () => {
-      if (!query) return [];
-      const response = await axios.get(
+    setIsLoading(true);
+    try {
+      const response = await fetch(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
       );
-      return response.data.meals || [];
-    },
-    enabled: !!query,
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
-  });
+      const data = await response.json();
+      setMeals(data.meals || []);
+      setError(null);
+    } catch (err) {
+      setError("Error fetching meals");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const clearMeals = () => {
+    setMeals(null); // Reset meals to null
+  };
+
+  return { meals, isLoading, error, fetchMeals, clearMeals };
+};
+
+export default useSearchMeals;

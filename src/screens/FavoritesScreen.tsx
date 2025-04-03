@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-} from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useFavorites } from "../hooks/useFavorites";
 
 const FavoritesScreen = () => {
@@ -15,7 +7,6 @@ const FavoritesScreen = () => {
 
   return (
     <View style={{ flex: 1, padding: 16 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold" }}>Favorites</Text>
       <FlatList
         data={favorites}
         keyExtractor={(item) => item.idMeal}

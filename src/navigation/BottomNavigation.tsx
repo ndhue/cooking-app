@@ -1,13 +1,10 @@
-import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScreen";
-import { FavoritesScreen, ProfileScreen, SearchScreen } from "../screens";
+import React from "react";
 import Icon from "react-native-vector-icons/Ionicons";
-
-export type RootStackParamList = {
-  SearchScreen: undefined;
-  MealDetail: { mealId: string };
-};
+import { FavoritesScreen } from "../screens";
+import HomeScreen from "../screens/HomeScreen";
+import SearchFoodScreen from "../screens/SearchFoodScreen";
+import SearchMealsScreen from "../screens/SearchMealsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,8 +17,10 @@ const BottomNavigation = () => {
 
           if (route.name === "Home") {
             iconName = "home";
-          } else if (route.name === "Search") {
-            iconName = "search";
+          } else if (route.name === "Foods") {
+            iconName = "fast-food";
+          } else if (route.name === "Meals") {
+            iconName = "restaurant";
           } else if (route.name === "Favorites") {
             iconName = "heart";
           } else if (route.name === "Profile") {
@@ -32,14 +31,12 @@ const BottomNavigation = () => {
         },
         tabBarActiveTintColor: "#79C388",
         tabBarInactiveTintColor: "#cecece",
-        tabBarShowLabel: false, // Hide tab names
-        headerShown: false,
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name="Foods" component={SearchFoodScreen} />
+      <Tab.Screen name="Meals" component={SearchMealsScreen} />
       <Tab.Screen name="Favorites" component={FavoritesScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
