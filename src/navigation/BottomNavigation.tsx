@@ -4,6 +4,11 @@ import HomeScreen from "../screens/HomeScreen";
 import { FavoritesScreen, ProfileScreen, SearchScreen } from "../screens";
 import Icon from "react-native-vector-icons/Ionicons";
 
+export type RootStackParamList = {
+  SearchScreen: undefined;
+  MealDetail: { mealId: string };
+};
+
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
