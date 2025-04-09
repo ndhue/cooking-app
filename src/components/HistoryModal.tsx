@@ -41,9 +41,9 @@ const HistoryModal: React.FC<HistoryModalProps> = ({
           onPress={() => {}} // Prevent closing when clicking inside
         >
           <View style={styles.historyHeader}>
-            <Text style={styles.historyTitle}>Lịch sử tìm kiếm:</Text>
+            <Text style={styles.historyTitle}>Histories:</Text>
             <TouchableOpacity onPress={onClearHistory}>
-              <Text style={styles.clearHistoryText}>Xóa</Text>
+              <Text style={styles.clearHistoryText}>Clear</Text>
             </TouchableOpacity>
           </View>
           {history.length > 0 ? (
@@ -57,7 +57,7 @@ const HistoryModal: React.FC<HistoryModalProps> = ({
               )}
             />
           ) : (
-            <Text style={styles.emptyHistoryText}>Không có lịch sử.</Text>
+            <Text style={styles.emptyHistoryText}>No search history.</Text>
           )}
         </TouchableOpacity>
       </TouchableOpacity>

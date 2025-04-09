@@ -60,7 +60,7 @@ const SearchFoodScreen = () => {
           style={styles.historyIcon}
           onPress={() => setShowHistoryModal(true)}
         >
-          <Ionicons name="time-outline" size={24} color="#007AFF" />
+          <Ionicons name="time-outline" size={24} color="#91C788" />
         </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
@@ -92,7 +92,7 @@ const SearchFoodScreen = () => {
       />
 
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#91C788" />
       ) : !foodItems ? (
         <Text style={styles.emptyFood}>Start searching for foods.</Text>
       ) : foodItems.length > 0 ? (
@@ -160,9 +160,9 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   searchButton: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#91C788",
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 16,
     marginBottom: 16,
     alignItems: "center",
   },
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
   emptyFood: {
     textAlign: "center",
     marginTop: 20,
-    fontSize: 18,
+    fontSize: 16,
     color: "#888",
     fontStyle: "italic",
   },

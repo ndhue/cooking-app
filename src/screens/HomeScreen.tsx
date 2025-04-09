@@ -44,7 +44,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView style={{ marginHorizontal: 30 }}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerText}>Hello Pretty,</Text>
@@ -107,8 +107,7 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
-    marginHorizontal: 30,
+    backgroundColor: "#FFFFFF",
   },
   header: {
     padding: 20,

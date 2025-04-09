@@ -53,7 +53,7 @@ const SearchMealsScreen = () => {
           onSubmitEditing={handleSearch}
         />
         <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-          <Ionicons name="search" size={24} color="#007AFF" />
+          <Ionicons name="search" size={24} color="#91C788" />
         </TouchableOpacity>
       </View>
 
@@ -69,7 +69,7 @@ const SearchMealsScreen = () => {
 
       {/* Loading Indicator */}
       {isLoading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#91C788" />
       ) : !meals ? (
         <Text style={styles.emptyText}>Start searching for meals.</Text>
       ) : meals.length > 0 ? (
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   emptyText: {
     textAlign: "center",
     marginTop: 20,
-    fontSize: 18,
+    fontSize: 16,
     color: "#888",
     fontStyle: "italic",
   },
