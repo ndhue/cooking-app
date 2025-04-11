@@ -5,13 +5,14 @@ export const useFavorites = () => {
   const [favoriteMeals, setFavoriteMeals] = useState<any[]>([]);
   const [favoriteFoods, setFavoriteFoods] = useState<any[]>([]);
 
+  const loadFavorites = async () => {
+    const storedMeals = await AsyncStorage.getItem("favoriteMeals");
+    const storedFoods = await AsyncStorage.getItem("favoriteFoods");
+    setFavoriteMeals(storedMeals ? JSON.parse(storedMeals) : []);
+    setFavoriteFoods(storedFoods ? JSON.parse(storedFoods) : []);
+  };
+
   useEffect(() => {
-    const loadFavorites = async () => {
-      const storedMeals = await AsyncStorage.getItem("favoriteMeals");
-      const storedFoods = await AsyncStorage.getItem("favoriteFoods");
-      setFavoriteMeals(storedMeals ? JSON.parse(storedMeals) : []);
-      setFavoriteFoods(storedFoods ? JSON.parse(storedFoods) : []);
-    };
     loadFavorites();
   }, []);
 
@@ -41,6 +42,10 @@ export const useFavorites = () => {
     await AsyncStorage.setItem("favoriteFoods", JSON.stringify(updatedFoods));
   };
 
+  const refreshFavorites = () => {
+    loadFavorites();
+  };
+
   return {
     favoriteMeals,
     favoriteFoods,
@@ -48,5 +53,6 @@ export const useFavorites = () => {
     removeFavoriteMeal,
     addFavoriteFood,
     removeFavoriteFood,
+    refreshFavorites, // Expose refreshFavorites
   };
 };

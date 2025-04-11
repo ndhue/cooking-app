@@ -1,6 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native"; // Import useFocusEffect
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack"; // Import type
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"; // Import FlatList and Image
 import EmptyState from "../components/EmptyState";
 import FoodList from "../components/FoodList";
@@ -9,10 +9,16 @@ import { useFavorites } from "../hooks/useFavorites";
 import type { RootStackParamList } from "../navigation/StackNavigation"; // Import RootStackParamList
 
 const FavoritesScreen = () => {
-  const { favoriteFoods, favoriteMeals } = useFavorites();
+  const { favoriteFoods, favoriteMeals, refreshFavorites } = useFavorites();
   const [selectedTab, setSelectedTab] = useState<"Food" | "Recipes">("Food");
   const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>(); // Typed navigation
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  useFocusEffect(
+    useCallback(() => {
+      refreshFavorites();
+    }, [])
+  );
 
   const renderEmptyState = () => {
     if (selectedTab === "Food" && favoriteFoods.length === 0) {
