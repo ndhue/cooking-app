@@ -6,7 +6,16 @@ import HomeScreen from "../screens/HomeScreen";
 import SearchFoodScreen from "../screens/SearchFoodScreen";
 import SearchMealsScreen from "../screens/SearchMealsScreen";
 
-const Tab = createBottomTabNavigator();
+// Define BottomTabParamList
+export type BottomTabParamList = {
+  Home: undefined;
+  Foods: undefined;
+  Meals: undefined;
+  Favorites: undefined;
+};
+
+// Update Tab Navigator with type
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const BottomNavigation = () => {
   return (

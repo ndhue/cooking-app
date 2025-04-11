@@ -1,48 +1,37 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import {
   ActivityIndicator,
-  FlatList,
-  Image,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import { NutritionData } from "../api/api";
+import FoodList from "../components/FoodList";
 import HistoryModal from "../components/HistoryModal";
 import News from "../components/News";
 import { useFetchFoods, useSearchHistory } from "../hooks";
-import { RootStackParamList } from "../navigation/StackNavigation";
-
-type HomeScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  "Home"
->;
 
 const SearchFoodScreen = () => {
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+  const [searchInput, setSearchInput] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
+
   const [showHistoryModal, setShowHistoryModal] = useState<boolean>(false);
-  const { foodItems, loading, error, fetchFoods, clearFoods } = useFetchFoods();
+  const { foodItems, loading, error } = useFetchFoods(searchQuery);
   const { history, addToHistory, clearHistory } = useSearchHistory();
 
   const handleSearch = () => {
-    if (searchQuery.trim() !== "") {
+    if (searchInput.trim() !== "") {
       addToHistory(searchQuery); // Lưu từ khóa tìm kiếm
-      fetchFoods(searchQuery); // Gọi API tìm kiếm
-      setSearchQuery(""); // Reset lại ô tìm kiếm
+      setSearchInput(""); // Clear the search input
+      setSearchQuery(searchInput); // Set the search query
     }
   };
 
   const handleClearSearch = () => {
-    clearFoods(); // Reset the food items
-  };
-  const handleNavigateToDetails = (food: NutritionData) => {
-    navigation.navigate("FoodDetailsScreen", { food });
+    setSearchInput("");
+    setSearchQuery("");
   };
 
   return (
@@ -52,8 +41,8 @@ const SearchFoodScreen = () => {
         <TextInput
           style={styles.searchInput}
           placeholder="Search for food..."
-          value={searchQuery}
-          onChangeText={setSearchQuery}
+          value={searchInput}
+          onChangeText={setSearchInput}
           onSubmitEditing={handleSearch}
         />
         <TouchableOpacity
@@ -96,27 +85,9 @@ const SearchFoodScreen = () => {
       ) : !foodItems ? (
         <Text style={styles.emptyFood}>Start searching for foods.</Text>
       ) : foodItems.length > 0 ? (
-        <FlatList
-          data={foodItems}
-          keyExtractor={(item) => item.food_name}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.itemContainer}
-              onPress={() => handleNavigateToDetails(item)}
-            >
-              <Image
-                source={{ uri: item.photo.thumb }}
-                style={styles.itemImage}
-              />
-              <View style={styles.itemDetails}>
-                <Text style={styles.itemText}>{item.food_name}</Text>
-                <Text style={styles.itemSubText}>
-                  Calories: {item.nf_calories || "N/A"} kcal
-                </Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
+        <View style={{ flex: 1 }}>
+          <FoodList foodItems={foodItems} />
+        </View>
       ) : (
         <Text style={styles.emptyFood}>No food founds.</Text>
       )}
@@ -132,6 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: "#fff",
   },
   favoritesButton: {
     borderRadius: 8,
@@ -150,6 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 8,
     paddingHorizontal: 8,
+    backgroundColor: "#fafafa",
   },
   searchInput: {
     flex: 1,
@@ -174,41 +147,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "flex-end",
   },
-  itemContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 10,
-    marginVertical: 5,
-    backgroundColor: "#f9f9f9",
-    borderRadius: 8,
-  },
-  itemImage: {
-    width: 50,
-    height: 50,
-    marginRight: 16,
-    borderRadius: 25,
-  },
-  itemDetails: {
-    flex: 1,
-  },
-  itemText: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  itemSubText: {
-    fontSize: 14,
-    color: "#888",
-  },
-  errorText: {
-    color: "red",
-    marginBottom: 10,
-  },
   emptyFood: {
     textAlign: "center",
     marginTop: 20,
     fontSize: 16,
     color: "#888",
     fontStyle: "italic",
+  },
+  errorText: {
+    color: "red",
+    marginBottom: 10,
   },
 });
 export default SearchFoodScreen;

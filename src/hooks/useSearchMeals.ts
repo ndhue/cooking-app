@@ -1,33 +1,22 @@
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { fetchMeals } from "../api/api";
 
-const useSearchMeals = () => {
-  const [meals, setMeals] = useState<any[] | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+const useSearchMeals = (searchQuery: string) => {
+  const {
+    data: meals,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["meals", searchQuery],
+    queryFn: () => fetchMeals(searchQuery),
+    enabled: !!searchQuery,
+  });
 
-  const fetchMeals = async (query: string) => {
-    if (!query) return null;
-
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
-      );
-      const data = await response.json();
-      setMeals(data.meals || []);
-      setError(null);
-    } catch (err) {
-      setError("Error fetching meals");
-    } finally {
-      setIsLoading(false);
-    }
+  return {
+    meals,
+    isLoading,
+    error: error ? "Error fetching meals" : null,
   };
-
-  const clearMeals = () => {
-    setMeals(null); // Reset meals to null
-  };
-
-  return { meals, isLoading, error, fetchMeals, clearMeals };
 };
 
 export default useSearchMeals;

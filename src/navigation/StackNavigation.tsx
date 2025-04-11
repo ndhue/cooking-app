@@ -1,8 +1,10 @@
+import type { NavigatorScreenParams } from "@react-navigation/native"; // Import NavigatorScreenParams
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import { NutritionData } from "../api/api";
 import FoodDetailsScreen from "../screens/FoodDetailsScreen";
 import MealDetailsScreen from "../screens/MealDetailsSreen"; // Import MealDetailsScreen
+import type { BottomTabParamList } from "./BottomNavigation"; // Import BottomTabParamList
 import BottomNavigation from "./BottomNavigation";
 
 // Define the navigation parameter list
@@ -13,7 +15,7 @@ export type RootStackParamList = {
   SearchMealsScreen: undefined;
   FavoritesScreen: undefined;
   MealDetail: { mealId: string };
-  Main: undefined; // Added for StackNavigation
+  Main: NavigatorScreenParams<BottomTabParamList>; // Use NavigatorScreenParams
   MealDetailsScreen: { mealId: string }; // Add MealDetailsScreen
 };
 const Stack = createNativeStackNavigator<RootStackParamList>();

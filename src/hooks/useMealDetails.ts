@@ -1,21 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import { fetchMealDetails, Meal } from "../api/api"; // Import fetchMealDetails and Meal type
 
 const useMealDetails = (mealId: string) => {
-  const [meal, setMeal] = useState<any[] | null>(null);
+  const [meal, setMeal] = useState<Meal | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!mealId) return;
 
-    const fetchMealDetails = async () => {
+    const loadMealDetails = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
-        );
-        setMeal(response.data.meals[0] || null);
+        const data = await fetchMealDetails(mealId); // Use fetchMealDetails from api
+        setMeal(data || null);
         setError(null);
       } catch (err) {
         setError("Failed to fetch meal details");
@@ -24,7 +22,7 @@ const useMealDetails = (mealId: string) => {
       }
     };
 
-    fetchMealDetails();
+    loadMealDetails();
   }, [mealId]);
 
   return { meal, isLoading, error };

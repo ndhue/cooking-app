@@ -20,6 +20,14 @@ export interface NutritionData {
   };
 }
 
+export interface Meal {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+  strInstructions: string;
+  [key: string]: any; // To account for dynamic ingredient and measure keys
+}
+
 export const fetchNutritionData = async (query: string) => {
   try {
     if (!NUTRITIONIX_APP_ID || !NUTRITIONIX_APP_KEY) {
@@ -54,4 +62,23 @@ export const fetchNutritionData = async (query: string) => {
     console.error("Error fetching data:", error);
     return [];
   }
+};
+
+export const fetchMeals = async (query: string) => {
+  const response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+  );
+
+  const data = await response.json();
+  return (data.meals as Meal[]) || [];
+};
+
+export const fetchMealDetails = async (
+  mealId: string
+): Promise<Meal | null> => {
+  const response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`
+  );
+  const data = await response.json();
+  return data.meals ? data.meals[0] : null;
 };

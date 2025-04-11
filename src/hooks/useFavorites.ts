@@ -1,29 +1,52 @@
-import { useEffect, useState } from "react";
-import { Meal } from "./useSearchMeals";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 
 export const useFavorites = () => {
-  const [favorites, setFavorites] = useState<Meal[]>([]);
+  const [favoriteMeals, setFavoriteMeals] = useState<any[]>([]);
+  const [favoriteFoods, setFavoriteFoods] = useState<any[]>([]);
 
   useEffect(() => {
     const loadFavorites = async () => {
-      const storedFavorites = await AsyncStorage.getItem("favorites");
-      setFavorites(storedFavorites ? JSON.parse(storedFavorites) : []);
+      const storedMeals = await AsyncStorage.getItem("favoriteMeals");
+      const storedFoods = await AsyncStorage.getItem("favoriteFoods");
+      setFavoriteMeals(storedMeals ? JSON.parse(storedMeals) : []);
+      setFavoriteFoods(storedFoods ? JSON.parse(storedFoods) : []);
     };
     loadFavorites();
   }, []);
 
-  const addFavorite = async (meal: Meal) => {
-    const updatedFavorites = [...favorites, meal];
-    setFavorites(updatedFavorites);
-    await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  const addFavoriteMeal = async (meal: any) => {
+    const updatedMeals = [...favoriteMeals, meal];
+    setFavoriteMeals(updatedMeals);
+    await AsyncStorage.setItem("favoriteMeals", JSON.stringify(updatedMeals));
   };
 
-  const removeFavorite = async (mealId: string) => {
-    const updatedFavorites = favorites.filter((meal) => meal.idMeal !== mealId);
-    setFavorites(updatedFavorites);
-    await AsyncStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  const removeFavoriteMeal = async (mealId: string) => {
+    const updatedMeals = favoriteMeals.filter((meal) => meal.idMeal !== mealId);
+    setFavoriteMeals(updatedMeals);
+    await AsyncStorage.setItem("favoriteMeals", JSON.stringify(updatedMeals));
   };
 
-  return { favorites, addFavorite, removeFavorite };
+  const addFavoriteFood = async (food: any) => {
+    const updatedFoods = [...favoriteFoods, food];
+    setFavoriteFoods(updatedFoods);
+    await AsyncStorage.setItem("favoriteFoods", JSON.stringify(updatedFoods));
+  };
+
+  const removeFavoriteFood = async (foodName: string) => {
+    const updatedFoods = favoriteFoods.filter(
+      (food) => food.food_name !== foodName
+    );
+    setFavoriteFoods(updatedFoods);
+    await AsyncStorage.setItem("favoriteFoods", JSON.stringify(updatedFoods));
+  };
+
+  return {
+    favoriteMeals,
+    favoriteFoods,
+    addFavoriteMeal,
+    removeFavoriteMeal,
+    addFavoriteFood,
+    removeFavoriteFood,
+  };
 };
