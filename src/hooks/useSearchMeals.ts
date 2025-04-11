@@ -10,6 +10,8 @@ const useSearchMeals = (searchQuery: string) => {
     queryKey: ["meals", searchQuery],
     queryFn: () => fetchMeals(searchQuery),
     enabled: !!searchQuery,
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
   });
 
   return {

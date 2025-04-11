@@ -10,6 +10,8 @@ const useFetchFoods = (searchQuery: string) => {
     queryKey: ["foods", searchQuery],
     queryFn: () => fetchNutritionData(searchQuery),
     enabled: !!searchQuery,
+    staleTime: 1000 * 60 * 10, // 10 minutes
+    gcTime: 1000 * 60 * 10, // 10 minutes
   });
 
   return { foodItems, loading, error: error ? "Error fetching foods" : null };
