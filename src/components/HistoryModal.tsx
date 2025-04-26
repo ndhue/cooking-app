@@ -33,12 +33,12 @@ const HistoryModal: React.FC<HistoryModalProps> = ({
       <TouchableOpacity
         style={styles.modalContainer}
         activeOpacity={1}
-        onPress={onClose} // Close modal when clicking outside
+        onPress={onClose} 
       >
         <TouchableOpacity
           style={styles.modalContent}
           activeOpacity={1}
-          onPress={() => {}} // Prevent closing when clicking inside
+          onPress={() => {}} 
         >
           <View style={styles.historyHeader}>
             <Text style={styles.historyTitle}>Histories:</Text>
@@ -68,7 +68,7 @@ const HistoryModal: React.FC<HistoryModalProps> = ({
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    justifyContent: "flex-end", // Align modal at the bottom
+    justifyContent: "flex-end", 
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {

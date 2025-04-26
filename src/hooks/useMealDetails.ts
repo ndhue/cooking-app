@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchMealDetails, Meal } from "../api/api"; // Import fetchMealDetails and Meal type
+import { fetchMealDetails, Meal } from "../api/api";
 
 const useMealDetails = (mealId: string) => {
   const [meal, setMeal] = useState<Meal | null>(null);
@@ -12,7 +12,7 @@ const useMealDetails = (mealId: string) => {
     const loadMealDetails = async () => {
       setIsLoading(true);
       try {
-        const data = await fetchMealDetails(mealId); // Use fetchMealDetails from api
+        const data = await fetchMealDetails(mealId);
         setMeal(data || null);
         setError(null);
       } catch (err) {

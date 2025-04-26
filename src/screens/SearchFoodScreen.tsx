@@ -23,9 +23,9 @@ const SearchFoodScreen = () => {
 
   const handleSearch = () => {
     if (searchInput.trim() !== "") {
-      addToHistory(searchQuery); // Lưu từ khóa tìm kiếm
-      setSearchInput(""); // Clear the search input
-      setSearchQuery(searchInput); // Set the search query
+      addToHistory(searchQuery); 
+      setSearchInput("");
+      setSearchQuery(searchInput); 
     }
   };
 
@@ -36,7 +36,6 @@ const SearchFoodScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Search Input */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -56,7 +55,6 @@ const SearchFoodScreen = () => {
         <Text style={styles.searchButtonText}>Search</Text>
       </TouchableOpacity>
 
-      {/* Clear Button */}
       {Array.isArray(foodItems) && (
         <TouchableOpacity
           style={styles.clearButton}
@@ -68,7 +66,6 @@ const SearchFoodScreen = () => {
         </TouchableOpacity>
       )}
 
-      {/* History Modal */}
       <HistoryModal
         visible={showHistoryModal}
         history={history}

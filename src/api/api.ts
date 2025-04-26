@@ -25,7 +25,7 @@ export interface Meal {
   strMeal: string;
   strMealThumb: string;
   strInstructions: string;
-  [key: string]: any; // To account for dynamic ingredient and measure keys
+  [key: string]: any;
 }
 
 export const fetchNutritionData = async (query: string) => {

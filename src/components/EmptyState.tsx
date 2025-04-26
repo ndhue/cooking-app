@@ -5,12 +5,12 @@ const EmptyState = ({
   title,
   subtitle,
   buttonText,
-  onButtonPress, // Added prop
+  onButtonPress,
 }: {
   title: string;
   subtitle: string;
   buttonText: string;
-  onButtonPress: () => void; // Added type
+  onButtonPress: () => void;
 }) => (
   <View
     style={{
@@ -38,7 +38,7 @@ const EmptyState = ({
         paddingVertical: 10,
         borderRadius: 20,
       }}
-      onPress={onButtonPress} // Added handler
+      onPress={onButtonPress}
     >
       <Text style={{ color: "white", fontWeight: "600" }}>{buttonText}</Text>
     </TouchableOpacity>

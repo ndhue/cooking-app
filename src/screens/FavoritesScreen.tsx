@@ -1,12 +1,12 @@
-import { useFocusEffect, useNavigation } from "@react-navigation/native"; // Import useFocusEffect
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack"; // Import type
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useCallback, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"; // Import FlatList and Image
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import EmptyState from "../components/EmptyState";
 import FoodList from "../components/FoodList";
 import MealList from "../components/MealList";
 import { useFavorites } from "../hooks/useFavorites";
-import type { RootStackParamList } from "../navigation/StackNavigation"; // Import RootStackParamList
+import type { RootStackParamList } from "../navigation/StackNavigation"; 
 
 const FavoritesScreen = () => {
   const { favoriteFoods, favoriteMeals, refreshFavorites } = useFavorites();
@@ -27,7 +27,7 @@ const FavoritesScreen = () => {
           title="No Foods Found!"
           subtitle="You don’t save any foods. Go ahead, search and save your favorite food."
           buttonText="Search Food"
-          onButtonPress={() => navigation.navigate("Main", { screen: "Foods" })} // Update navigation logic
+          onButtonPress={() => navigation.navigate("Main", { screen: "Foods" })}
         />
       );
     }
@@ -38,7 +38,7 @@ const FavoritesScreen = () => {
           title="No Recipes Found!"
           subtitle="You don’t save any recipes. Go ahead, search and save your favorite recipe."
           buttonText="Search Recipe"
-          onButtonPress={() => navigation.navigate("Main", { screen: "Meals" })} // Correct route name
+          onButtonPress={() => navigation.navigate("Main", { screen: "Meals" })}
         />
       );
     }

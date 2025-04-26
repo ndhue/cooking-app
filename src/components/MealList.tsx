@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons for the heart icon
+import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   itemContent: {
     flexDirection: "row",
     alignItems: "center",
-    flex: 1, // Ensure content takes up available space
+    flex: 1, 
   },
   itemImage: {
     width: 50,

@@ -53,6 +53,6 @@ export const useFavorites = () => {
     removeFavoriteMeal,
     addFavoriteFood,
     removeFavoriteFood,
-    refreshFavorites, // Expose refreshFavorites
+    refreshFavorites,
   };
 };

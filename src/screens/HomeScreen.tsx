@@ -9,7 +9,6 @@ import {
   View,
 } from "react-native";
 
-// Helper function to resolve image paths
 const getImageSource = (imageName: string) => {
   switch (imageName) {
     case "../assets/fruits.png":

@@ -18,8 +18,8 @@ const SearchMealsScreen = () => {
 
   const handleSearch = () => {
     if (searchInput.trim() !== "") {
-      setSearchInput(""); // Clear the search input
-      setSearchQuery(searchInput); // Set the search query
+      setSearchInput("");
+      setSearchQuery(searchInput);
     }
   };
 
@@ -30,7 +30,6 @@ const SearchMealsScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* Search Input */}
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
@@ -45,7 +44,6 @@ const SearchMealsScreen = () => {
         <Text style={styles.searchButtonText}>Search</Text>
       </TouchableOpacity>
 
-      {/* Clear Button */}
       {Array.isArray(meals) && meals.length > 0 && (
         <TouchableOpacity
           style={styles.clearButton}
@@ -55,7 +53,6 @@ const SearchMealsScreen = () => {
         </TouchableOpacity>
       )}
 
-      {/* Loading Indicator */}
       {isLoading ? (
         <ActivityIndicator size="large" color="#91C788" />
       ) : !meals ? (
@@ -68,7 +65,6 @@ const SearchMealsScreen = () => {
         <Text style={styles.emptyText}>No meals found.</Text>
       )}
 
-      {/* Error Message */}
       {error && <Text style={styles.errorText}>{error}</Text>}
 
       <News />

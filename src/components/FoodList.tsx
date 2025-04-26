@@ -1,4 +1,4 @@
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons for heart icon
+import { Ionicons } from "@expo/vector-icons"; 
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
@@ -11,7 +11,7 @@ import {
   View,
 } from "react-native";
 import { NutritionData } from "../api/api";
-import { useFavorites } from "../hooks/useFavorites"; // Import useFavorites
+import { useFavorites } from "../hooks/useFavorites";
 import { RootStackParamList } from "../navigation/StackNavigation";
 
 type MealScreenNavigationProp = NativeStackNavigationProp<
